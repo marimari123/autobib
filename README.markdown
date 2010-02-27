@@ -8,8 +8,8 @@ bibtex info that is written to bibtex.bib.
 
 Dependencies
 ------------
--    pygthon 2.5
--    BeatifulSoup
+-    python 2.5
+-    BeautifulSoup
 -    pdftotext
 
 Running
