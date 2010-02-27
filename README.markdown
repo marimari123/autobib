@@ -1,10 +1,10 @@
 autobib
 =========
 
-This is a simple script to automatically create a bibxtex file
-for bibliography from research papers etc. in pdf format. Parses 
-pdf-files in the given path and search google scholar for
-bibtex info and creates a bibtex.bib. 
+This is a simple but time saving script to automatically create a 
+bibxtex file for bibliography from research papers etc. in pdf 
+format. Parses pdf-files in the given path and search google 
+scholar for bibtex info and creates a bibtex.bib. 
 
 Dependencies
 ------------
