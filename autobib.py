@@ -24,6 +24,7 @@ import hashlib
 import random
 import sys
 import os
+import locale
 import subprocess
 import optparse
 import logging
@@ -45,19 +46,22 @@ def create_bibtex(args):
             if bib != None:
                 file.write(bib + '\n')
             else:
-                file.write('ERROR: Could not find bibtex for:\n%s on %s\n\n' % (filename, GOOGLE_SCHOLAR_URL))
+                file.write('ERROR: Could not find bibtex for: %s\n\n' % (filename))
+                print('ERROR: Could not find bibtex for: %s\n\n' % filename)
     file.close()
+    print('Bibliography written to %s' % args + '/' + BIB_FILE)
 
 def get_pdf_bibtex(pdf):
     txt = pdf_to_txt(pdf)
-    txt = re.sub("\W", " ", txt)
+    txt = re.sub("\W", " ", txt, re.LOCALE)
+    txt = re.sub("\d", "", txt)
     words = txt.strip().split()[:20]
     search_str = " ".join(words)
     bib = search(search_str)
     return bib
 
 def search(search_str):
-    logging.debug("Search: %s" % search_str)
+    logging.debug("Search: %s" % search_str.decode(locale.getdefaultlocale()[1]))
     search_str = '/scholar?q=' + urllib2.quote(search_str)
     url = GOOGLE_SCHOLAR_URL + search_str
     request = urllib2.Request(url, headers=HEADERS)
@@ -65,6 +69,21 @@ def search(search_str):
     html = response.read()
     html.decode('ascii', 'ignore') 
     soup = BeautifulSoup(html)
+    if len(soup.findAll('a', href=re.compile("^/scholar.bib"))) != 0:
+        bib = get_bib(soup)
+        return bib
+    elif soup.find('a', href=re.compile(".scholar\?hl.")) != None:
+        url = str(soup.find('a', href=re.compile(".scholar\?hl."))['href'])
+        url = GOOGLE_SCHOLAR_URL+url
+        print(url)
+        request = urllib2.Request(url, headers=HEADERS)
+        response = urllib2.urlopen(request)
+        html = response.read()
+        soup = BeautifulSoup(html)
+        bib = get_bib(soup)
+        return bib
+    
+def get_bib(soup):
     link = soup.findAll('a', href=re.compile("^/scholar.bib"))
     if len(link) != 0:
         url = link[0]["href"]
