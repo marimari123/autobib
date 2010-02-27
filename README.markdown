@@ -1,15 +1,15 @@
 autobib
-=========
+=======
 
-This is a simple but time saving script to automatically create a 
-bibxtex bibliography from from scientific papers etc. in pdf 
-format. Parses pdf-files in the given path and search google 
-scholar for bibtex info and creates a bibtex.bib. 
+This is a simple but time saving script that automatically creates a 
+bibxtex bibliography from from your scientific papers or similar in pdf 
+format. Parses the pdf-files in the given path and searches google 
+scholar for bibtex info and creates a bibtex.bib file. 
 
 Dependencies
 ------------
 -    python
--    BeautifulSoup
+-    beautifulsoup
 -    pdftotext 
 
 Debian/Ubuntu install depedencies:
