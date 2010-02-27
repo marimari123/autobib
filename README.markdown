@@ -14,11 +14,14 @@ Dependencies
 
 Debian/Ubuntu install depedencies:
 ----------------------------------
+To install depenencies on Debian and Ubuntu
+
     $ sudo apt-get install poppler-utils python-beautifulsoup
 
 Running
 -------
 To run the program
+
     $ python autobib.py <path to your pdf's>
 
 Installing
