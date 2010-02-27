@@ -14,7 +14,7 @@ Dependencies
 
 Debian/Ubuntu install depedencies:
 ----------------------------------
-$ sudo apt-get install poppler-utils python-beautifulsoup
+    $ sudo apt-get install poppler-utils python-beautifulsoup
 
 Running
 -------
