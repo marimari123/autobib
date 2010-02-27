@@ -8,9 +8,9 @@ bibtex info that is written to bibtex.bib.
 
 Dependencies
 ------------
--    python 2.5
--    BeautifulSoup
--    pdftotext
+-    python >2.5
+-    BeautifulSoup (sudo apt-get install python-beautifulsoup)
+-    pdftotext $ (sudo apt-get install poppler-utils)
 
 Running
 -------
