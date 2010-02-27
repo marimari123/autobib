@@ -75,7 +75,6 @@ def search(search_str):
     elif soup.find('a', href=re.compile(".scholar\?hl.")) != None:
         url = str(soup.find('a', href=re.compile(".scholar\?hl."))['href'])
         url = GOOGLE_SCHOLAR_URL+url
-        print(url)
         request = urllib2.Request(url, headers=HEADERS)
         response = urllib2.urlopen(request)
         html = response.read()
