@@ -24,7 +24,6 @@ import hashlib
 import random
 import sys
 import os
-import locale
 import subprocess
 import optparse
 import logging
@@ -39,15 +38,13 @@ BIB_FILE = 'bibtex.bib'
 
 def get_pdf_bibtex(pdf):
     txt = pdf_to_txt(pdf)
-    txt = re.sub("\W", " ", txt, re.LOCALE)
-    txt = re.sub("\d", "", txt)
     words = txt.strip().split()[:20]
     search_str = " ".join(words)
     bib = search(search_str)
     return bib
 
 def search(search_str):
-    logging.debug("Search: %s" % search_str.decode(locale.getdefaultlocale()[1]))
+    logging.debug("Search: %s" % search_str)
     search_str = '/scholar?q=' + urllib2.quote(search_str)
     url = GOOGLE_SCHOLAR_URL + search_str
     request = urllib2.Request(url, headers=HEADERS)
@@ -88,7 +85,7 @@ def create_bibtex(args):
             if bib != None:
                 file.write(bib + '\n')
             else:
-                file.write('ERROR: Could not find bibtex for: %s\n\n'
+                file.write('@comment{ERROR: Could not find bibtex for: %s}\n\n'
                            %  (filename))
                 print('ERROR: Could not find bibtex for: %s\n\n' %
                       filename)
